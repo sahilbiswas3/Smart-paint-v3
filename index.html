@@ -1,0 +1,1872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Paint - Interior Services Since 1994</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables for Color Palette */
+        :root {
+            --primary: #0077B6;
+            --secondary: #FF5DA2;
+            --accent: #00E0FF;
+            --background: #FFFFFF;
+            --section-bg: #F5F5F5;
+            --text: #333333;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background-color: var(--background);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 119, 182, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 119, 182, 0.4);
+        }
+        
+        /* Hide View More button by default (desktop) */
+        .view-more-container {
+            display: none;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 119, 182, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+            padding: 0 1.5rem;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-left: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text);
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            transition: all 0.3s ease;
+            background-color: var(--text);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background-image: url('Shorted images/hero image/Hero_Image.jpg');
+            background-size: cover;
+            background-position: center;
+            margin-top: 0;
+            padding-top: 80px;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 119, 182, 0.8) 0%, rgba(255, 93, 162, 0.8) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            max-width: 700px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* Painting Showcase Section */
+        .showcase {
+            background-color: var(--background);
+        }
+
+        .showcase-gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin: 0 auto;
+        }
+
+        .showcase-item {
+            height: 250px;
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .showcase-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .showcase-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .showcase-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .showcase-item:hover .showcase-overlay {
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 1200px) {
+            .showcase-gallery {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.25rem;
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .showcase-gallery {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 500px) {
+            .showcase-gallery {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        .showcase-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .showcase-link {
+            color: var(--accent);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Service Highlight Section */
+        .services {
+            background-color: var(--section-bg);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover .service-image img {
+            transform: scale(1.1);
+        }
+
+        .service-content {
+            padding: 1.5rem;
+        }
+
+        .service-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .service-text {
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        /* About Section */
+        .about {
+            background-color: var(--background);
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-content h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text {
+            margin-bottom: 2rem;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            background-color: var(--section-bg);
+        }
+
+        .gallery-category {
+            margin-bottom: 3rem;
+        }
+
+        .category-title {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .gallery-slider {
+            position: relative;
+            overflow: hidden;
+            margin: 0 -1rem;
+        }
+
+        .gallery-track {
+            display: flex;
+            transition: transform 0.5s ease;
+            /* Add space for cloned slides */
+            width: fit-content;
+        }
+
+        .gallery-item {
+            min-width: 250px;
+            height: 200px;
+            margin: 0 1rem;
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 119, 182, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-link {
+            color: white;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background-color: var(--background);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .testimonial-text:before {
+            content: '\201C';
+            font-size: 4rem;
+            position: absolute;
+            left: -1.5rem;
+            top: -1.5rem;
+            color: rgba(0, 119, 182, 0.2);
+            font-family: serif;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1rem;
+            border: 4px solid var(--primary);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .author-image:hover img {
+            transform: scale(1.1);
+        }
+        
+
+
+        .author-name {
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .author-title {
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta .btn {
+            background: white;
+            color: var(--primary);
+            font-size: 1.1rem;
+            padding: 1rem 2.5rem;
+        }
+
+        .cta .btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-logo {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo span {
+            color: var(--secondary);
+        }
+
+        .footer-text {
+            margin-bottom: 1.5rem;
+            color: #aaa;
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .footer-title:after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient);
+            margin-top: 0.5rem;
+            border-radius: 2px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-link {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-link a {
+            color: #aaa;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .contact-icon {
+            margin-right: 1rem;
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--gradient);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Appointment Form */
+        .appointment-form {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 119, 182, 0.2);
+        }
+
+        /* Map */
+        .map-container {
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        /* Floating Contact Buttons */
+        .floating-contact {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 999;
+        }
+
+        .contact-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .phone-btn {
+            background: var(--gradient);
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+        }
+
+        .appointment-btn {
+            background: var(--secondary);
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                gap: 0;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                padding: 2rem 0;
+            }
+
+            .nav-item {
+                margin: 1rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .hero-buttons .btn {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+
+            .section {
+                padding: 3rem 0;
+            }
+
+            .section-title {
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .cta-title {
+                font-size: 1.8rem;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .showcase-gallery {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            
+            .showcase-item:nth-child(n+5) {
+                display: none;
+            }
+            
+            .view-all-container {
+                display: flex;
+                justify-content: center;
+                margin-top: 2rem;
+            }
+            
+            .view-all-btn {
+                background: var(--primary);
+                color: white;
+                padding: 0.8rem 2rem;
+                border-radius: 5px;
+                font-weight: 600;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                transition: all 0.3s ease;
+                text-decoration: none;
+            }
+            
+            .view-all-btn:hover {
+                background: var(--primary-dark);
+                transform: translateY(-3px);
+            }
+            
+            .view-more-container {
+                display: flex;
+                justify-content: center;
+                margin: 2rem 0;
+            }
+            
+            .view-more-btn {
+                background: var(--primary);
+                color: white;
+                padding: 0.8rem 2rem;
+                border-radius: 5px;
+                font-weight: 600;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                transition: all 0.3s ease;
+                text-decoration: none;
+            }
+            
+            .view-more-btn:hover {
+                background: var(--primary-dark);
+                transform: translateY(-3px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo" style="display: flex; align-items: center;">
+                <img src="SPS logo.svg" alt="Smart Paint Logo" style="height: 50px; width: auto;">
+                <span style="font-weight: bold; margin-left: 10px; font-size: 20px; color: var(--primary-color);">SMART PAINTING SERVICES</span>
+            </a>
+            <nav style="display: flex; align-items: center;">
+                <ul class="nav-menu" style="margin: 0; padding: 0;">
+                    <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+                    <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="#gallery" class="nav-link">Process</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Helping Kolkata look better since 1994</h1>
+                <p class="hero-subtitle">Expert interior services with a personal touch</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Get Free Estimate</a>
+                    <a href="#gallery" class="btn btn-secondary">See Our Work</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Painting Showcase Section -->
+    <section class="section showcase" id="showcase">
+        <div class="container">
+            <h2 class="section-title">Our Painting Work</h2>
+            <div class="showcase-gallery">
+                <!-- Interior Painting Images -->
+                <div class="showcase-item">
+                    <img src="Shorted images/Interior painting/IMG-20250701-WA0014.jpg" alt="Interior Painting">
+                    <div class="showcase-overlay">
+                        <h3 class="showcase-title">Interior Painting</h3>
+                        <a href="#" class="showcase-link">View More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="showcase-item">
+                    <img src="Shorted images/Interior painting/IMG-20250701-WA0034.jpg" alt="Interior Painting">
+                    <div class="showcase-overlay">
+                        <h3 class="showcase-title">Interior Painting</h3>
+                        <a href="#" class="showcase-link">View More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="showcase-item">
+                    <img src="Shorted images/Interior painting/IMG-20250701-WA0035.jpg" alt="Interior Painting">
+                    <div class="showcase-overlay">
+                        <h3 class="showcase-title">Interior Painting</h3>
+                        <a href="#" class="showcase-link">View More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="showcase-item">
+                    <img src="Shorted images/Interior painting/IMG-20250701-WA0036.jpg" alt="Interior Painting">
+                    <div class="showcase-overlay">
+                        <h3 class="showcase-title">Interior Painting</h3>
+                        <a href="#" class="showcase-link">View More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Exterior Painting Images -->
+                <div class="showcase-item">
+                    <img src="Shorted images/Exterior Painting/IMG-20250701-WA0011.jpg" alt="Exterior Painting">
+                    <div class="showcase-overlay">
+                        <h3 class="showcase-title">Exterior Painting</h3>
+                        <a href="#" class="showcase-link">View More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="showcase-item">
+                    <img src="Shorted images/Exterior Painting/IMG-20250701-WA0012.jpg" alt="Exterior Painting">
+                    <div class="showcase-overlay">
+                        <h3 class="showcase-title">Exterior Painting</h3>
+                        <a href="#" class="showcase-link">View More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="showcase-item">
+                    <img src="Shorted images/Exterior Painting/IMG-20250701-WA0018.jpg" alt="Exterior Painting">
+                    <div class="showcase-overlay">
+                        <h3 class="showcase-title">Exterior Painting</h3>
+                        <a href="#" class="showcase-link">View More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                
+                <!-- False Ceiling Images -->
+                <div class="showcase-item">
+                    <img src="Shorted images/False Celling/IMG-20250701-WA0013.jpg" alt="False Ceiling">
+                    <div class="showcase-overlay">
+                        <h3 class="showcase-title">False Ceiling</h3>
+                        <a href="#" class="showcase-link">View More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="showcase-item">
+                    <img src="Shorted images/False Celling/IMG-20250701-WA0015.jpg" alt="False Ceiling">
+                    <div class="showcase-overlay">
+                        <h3 class="showcase-title">False Ceiling</h3>
+                        <a href="#" class="showcase-link">View More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="showcase-item">
+                    <img src="Shorted images/False Celling/IMG-20250701-WA0016.jpg" alt="False Ceiling">
+                    <div class="showcase-overlay">
+                        <h3 class="showcase-title">False Ceiling</h3>
+                        <a href="#" class="showcase-link">View More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="showcase-item">
+                    <img src="Shorted images/False Celling/IMG-20250701-WA0028.jpg" alt="False Ceiling">
+                    <div class="showcase-overlay">
+                        <h3 class="showcase-title">False Ceiling</h3>
+                        <a href="#" class="showcase-link">View More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Furniture Work Images -->
+                <div class="showcase-item">
+                    <img src="Shorted images/Furniture Work/IMG-20250701-WA0017.jpg" alt="Furniture Work">
+                    <div class="showcase-overlay">
+                        <h3 class="showcase-title">Furniture Work</h3>
+                        <a href="#" class="showcase-link">View More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="showcase-item">
+                    <img src="Shorted images/Furniture Work/IMG-20250701-WA0019.jpg" alt="Furniture Work">
+                    <div class="showcase-overlay">
+                        <h3 class="showcase-title">Furniture Work</h3>
+                        <a href="#" class="showcase-link">View More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="showcase-item">
+                    <img src="Shorted images/Furniture Work/IMG-20250701-WA0026.jpg" alt="Furniture Work">
+                    <div class="showcase-overlay">
+                        <h3 class="showcase-title">Furniture Work</h3>
+                        <a href="#" class="showcase-link">View More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="showcase-item">
+                    <img src="Shorted images/Furniture Work/IMG-20250701-WA0027.jpg" alt="Furniture Work">
+                    <div class="showcase-overlay">
+                        <h3 class="showcase-title">Furniture Work</h3>
+                        <a href="#" class="showcase-link">View More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Marble & Tiles Images -->
+                <div class="showcase-item">
+                    <img src="Shorted images/Marble tiles/IMG-20250701-WA0101.jpg" alt="Marble & Tiles">
+                    <div class="showcase-overlay">
+                        <h3 class="showcase-title">Marble & Tiles</h3>
+                        <a href="#" class="showcase-link">View More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="showcase-item">
+                    <img src="Shorted images/Marble tiles/IMG-20250701-WA0109.jpg" alt="Marble & Tiles">
+                    <div class="showcase-overlay">
+                        <h3 class="showcase-title">Marble & Tiles</h3>
+                        <a href="#" class="showcase-link">View More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Additional Interior Painting Images -->
+                <div class="showcase-item">
+                    <img src="Shorted images/Interior painting/IMG-20250701-WA0037.jpg" alt="Interior Painting">
+                    <div class="showcase-overlay">
+                        <h3 class="showcase-title">Interior Painting</h3>
+                        <a href="#" class="showcase-link">View More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="showcase-item">
+                    <img src="Shorted images/Interior painting/IMG-20250701-WA0040.jpg" alt="Interior Painting">
+                    <div class="showcase-overlay">
+                        <h3 class="showcase-title">Interior Painting</h3>
+                        <a href="#" class="showcase-link">View More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="showcase-item">
+                    <img src="Shorted images/Interior painting/IMG-20250701-WA0041.jpg" alt="Interior Painting">
+                    <div class="showcase-overlay">
+                        <h3 class="showcase-title">Interior Painting</h3>
+                        <a href="#" class="showcase-link">View More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="showcase-item">
+                    <img src="Shorted images/Interior painting/IMG-20250701-WA0042.jpg" alt="Interior Painting">
+                    <div class="showcase-overlay">
+                        <h3 class="showcase-title">Interior Painting</h3>
+                        <a href="#" class="showcase-link">View More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="view-more-container">
+                <a href="#" class="view-more-btn">View More <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Highlight Section -->
+    <section class="section services" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="Shorted images/Interior painting/IMG-20250701-WA0014.jpg" alt="Interior Painting">
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Interior Painting</h3>
+                        <p class="service-text">Transform your living spaces with our premium interior painting services. We use high-quality paints and techniques for a flawless finish.</p>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="Shorted images/Furniture Work/IMG-20250701-WA0017.jpg" alt="Furniture Work">
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Furniture Work</h3>
+                        <p class="service-text">Custom furniture solutions designed to fit your space and style. From restoration to custom builds, we bring your vision to life.</p>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="Shorted images/False Celling/IMG-20250701-WA0013.jpg" alt="False Ceiling">
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">False Ceiling</h3>
+                        <p class="service-text">Elevate your interiors with our custom false ceiling designs. Modern solutions for lighting, acoustics, and aesthetics.</p>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="Shorted images/Marble tiles/IMG-20250701-WA0101.jpg" alt="Marble & Tile Work">
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">Marble & Tile Work</h3>
+                        <p class="service-text">Expert installation of marble and tiles for floors, walls, and countertops. Premium materials and precision craftsmanship.</p>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="container">
+            <div class="about-container">
+                <div class="about-content">
+                    <h2 class="section-title" style="text-align: left; margin-bottom: 1.5rem;">About Us</h2>
+                    <p class="about-text">With over 30 years of experience, we're a Kolkata-based team passionate about transforming interiors. From precision painting to custom furniture, our goal is your satisfaction.</p>
+                    <p class="about-text">Our team of skilled professionals brings expertise, attention to detail, and a commitment to quality in every project we undertake. We believe in creating spaces that reflect your personality and meet your functional needs.</p>
+                    <a href="#contact" class="btn btn-primary">Get in Touch</a>
+                </div>
+                <div class="about-image">
+                    <img src="Shorted images/about us/aboutus.avif" alt="About Us">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Full Gallery Preview Section -->
+    <section class="section gallery" id="gallery">
+        <div class="container">
+            <h2 class="section-title">More of Our Work</h2>
+            
+            <!-- Interior Painting Gallery -->
+            <div class="gallery-category">
+                <h3 class="category-title">Interior Painting</h3>
+                <div class="gallery-slider">
+                    <div class="gallery-track">
+                        <div class="gallery-item">
+                            <img src="Shorted images/Interior painting/IMG-20250701-WA0014.jpg" alt="Interior Painting">
+                            <div class="gallery-overlay">
+                                <a href="#" class="gallery-link">View Details</a>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="Shorted images/Interior painting/IMG-20250701-WA0034.jpg" alt="Interior Painting">
+                            <div class="gallery-overlay">
+                                <a href="#" class="gallery-link">View Details</a>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="Shorted images/Interior painting/IMG-20250701-WA0035.jpg" alt="Interior Painting">
+                            <div class="gallery-overlay">
+                                <a href="#" class="gallery-link">View Details</a>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="Shorted images/Interior painting/IMG-20250701-WA0036.jpg" alt="Interior Painting">
+                            <div class="gallery-overlay">
+                                <a href="#" class="gallery-link">View Details</a>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="Shorted images/Interior painting/IMG-20250701-WA0037.jpg" alt="Interior Painting">
+                            <div class="gallery-overlay">
+                                <a href="#" class="gallery-link">View Details</a>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="Shorted images/Interior painting/IMG-20250701-WA0040.jpg" alt="Interior Painting">
+                            <div class="gallery-overlay">
+                                <a href="#" class="gallery-link">View Details</a>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="Shorted images/Interior painting/IMG-20250701-WA0041.jpg" alt="Interior Painting">
+                            <div class="gallery-overlay">
+                                <a href="#" class="gallery-link">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Exterior Painting Gallery -->
+            <div class="gallery-category">
+                <h3 class="category-title">Exterior Painting</h3>
+                <div class="gallery-slider">
+                    <div class="gallery-track">
+                        <div class="gallery-item">
+                            <img src="Shorted images/Exterior Painting/IMG-20250701-WA0011.jpg" alt="Exterior Painting">
+                            <div class="gallery-overlay">
+                                <a href="#" class="gallery-link">View Details</a>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="Shorted images/Exterior Painting/IMG-20250701-WA0012.jpg" alt="Exterior Painting">
+                            <div class="gallery-overlay">
+                                <a href="#" class="gallery-link">View Details</a>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="Shorted images/Exterior Painting/IMG-20250701-WA0018.jpg" alt="Exterior Painting">
+                            <div class="gallery-overlay">
+                                <a href="#" class="gallery-link">View Details</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Furniture Work Gallery -->
+            <div class="gallery-category">
+                <h3 class="category-title">Furniture Work</h3>
+                <div class="gallery-slider">
+                    <div class="gallery-track">
+                        <div class="gallery-item">
+                            <img src="Shorted images/Furniture Work/IMG-20250701-WA0017.jpg" alt="Furniture Work">
+                            <div class="gallery-overlay">
+                                <a href="#" class="gallery-link">View Details</a>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="Shorted images/Furniture Work/IMG-20250701-WA0019.jpg" alt="Furniture Work">
+                            <div class="gallery-overlay">
+                                <a href="#" class="gallery-link">View Details</a>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="Shorted images/Furniture Work/IMG-20250701-WA0026.jpg" alt="Furniture Work">
+                            <div class="gallery-overlay">
+                                <a href="#" class="gallery-link">View Details</a>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="Shorted images/Furniture Work/IMG-20250701-WA0027.jpg" alt="Furniture Work">
+                            <div class="gallery-overlay">
+                                <a href="#" class="gallery-link">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- False Ceiling Gallery -->
+            <div class="gallery-category">
+                <h3 class="category-title">False Ceiling</h3>
+                <div class="gallery-slider">
+                    <div class="gallery-track">
+                        <div class="gallery-item">
+                            <img src="Shorted images/False Celling/IMG-20250701-WA0013.jpg" alt="False Ceiling">
+                            <div class="gallery-overlay">
+                                <a href="#" class="gallery-link">View Details</a>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="Shorted images/False Celling/IMG-20250701-WA0015.jpg" alt="False Ceiling">
+                            <div class="gallery-overlay">
+                                <a href="#" class="gallery-link">View Details</a>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="Shorted images/False Celling/IMG-20250701-WA0016.jpg" alt="False Ceiling">
+                            <div class="gallery-overlay">
+                                <a href="#" class="gallery-link">View Details</a>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="Shorted images/False Celling/IMG-20250701-WA0028.jpg" alt="False Ceiling">
+                            <div class="gallery-overlay">
+                                <a href="#" class="gallery-link">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Marble & Tiles Gallery -->
+            <div class="gallery-category">
+                <h3 class="category-title">Marble & Tiles</h3>
+                <div class="gallery-slider">
+                    <div class="gallery-track">
+                        <div class="gallery-item">
+                            <img src="Shorted images/Marble tiles/IMG-20250701-WA0101.jpg" alt="Marble & Tiles">
+                            <div class="gallery-overlay">
+                                <a href="#" class="gallery-link">View Details</a>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="Shorted images/Marble tiles/IMG-20250701-WA0109.jpg" alt="Marble & Tiles">
+                            <div class="gallery-overlay">
+                                <a href="#" class="gallery-link">View Details</a>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="Shorted images/Marble tiles/IMG-20250701-WA0101.jpg" alt="Marble & Tiles">
+                            <div class="gallery-overlay">
+                                <a href="#" class="gallery-link">View Details</a>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="Shorted images/Marble tiles/IMG-20250701-WA0109.jpg" alt="Marble & Tiles">
+                            <div class="gallery-overlay">
+                                <a href="#" class="gallery-link">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">Smart Paint transformed our Salt Lake apartment with their exceptional painting service. The attention to detail and quality of work exceeded our expectations.</p>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="Shorted images/castomer photos/image1.jpg" alt="Abhijit Chatterjee">
+                        </div>
+                        <div>
+                            <h4 class="author-name">Abhijit Chatterjee</h4>
+                            <p class="author-title">Homeowner, Salt Lake</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">The custom furniture they built for our Park Street office is both beautiful and functional. Their team was professional and delivered on time.</p>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="Shorted images/castomer photos/image2.jpg" alt="Sanjay Bose">
+                        </div>
+                        <div>
+                            <h4 class="author-name">Sanjay Bose</h4>
+                            <p class="author-title">Business Owner, Park Street</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">We hired Smart Paint for our complete home renovation in New Town. Their marble work in our bathroom is stunning and has completely elevated the space.</p>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="Shorted images/castomer photos/castomer3.jpg" alt="Priyanka Mukherjee">
+                        </div>
+                        <div>
+                            <h4 class="author-name">Priyanka Mukherjee</h4>
+                            <p class="author-title">Homeowner, New Town</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section cta">
+        <div class="container">
+            <h2 class="cta-title">Got a space to transform? Let's get started.</h2>
+            <a href="#contact" class="btn">Get a Free Estimate</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-container">
+                <div>
+                    <a href="#" class="footer-logo">Smart<span>Paint</span></a>
+                    <p class="footer-text">Transforming spaces with quality and precision since 1994. Your vision, our expertise.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">Home</a></li>
+                        <li class="footer-link"><a href="#services">Services</a></li>
+                        <li class="footer-link"><a href="#about">About Us</a></li>
+                        <li class="footer-link"><a href="#gallery">Our Work</a></li>
+                        <li class="footer-link"><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-title">Services</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">Interior Painting</a></li>
+                        <li class="footer-link"><a href="#">Furniture Work</a></li>
+                        <li class="footer-link"><a href="#">False Ceiling</a></li>
+                        <li class="footer-link"><a href="#">Marble & Tile Work</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-title">Contact Us</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-phone contact-icon"></i>
+                        <p>+91 8777627173</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-whatsapp contact-icon"></i>
+                        <p><a href="https://wa.me/916290164176" target="_blank">WhatsApp Chat</a></p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope contact-icon"></i>
+                        <p>smartpaintingservice@outlook.com</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt contact-icon"></i>
+                        <p>Kolkata, West Bengal, India</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Appointment Booking Form -->
+            <div class="appointment-form" id="appointment-form">
+                <h3 class="footer-title">Book an Appointment</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Your Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Service Required</label>
+                        <select id="service" name="service" required>
+                            <option value="" disabled selected>Select a Service</option>
+                            <option value="interior-painting">Interior Painting</option>
+                            <option value="furniture-work">Furniture Work</option>
+                            <option value="false-ceiling">False Ceiling</option>
+                            <option value="marble-tile">Marble & Tile Work</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Preferred Date</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Additional Details</label>
+                        <textarea id="message" name="message" placeholder="Tell us more about your requirements" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Book Appointment</button>
+                </form>
+            </div>
+            
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d471220.5631094339!2d88.04952462422487!3d22.67575658863465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f882db4908f667%3A0x43e330e68f6c2cbc!2sKolkata%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1659532597176!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Smart Paint. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Contact Buttons -->
+    <div class="floating-contact">
+        <div class="contact-buttons">
+            <a href="https://wa.me/916290164176" target="_blank" class="contact-btn whatsapp-btn">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="tel:+918777627173" class="contact-btn phone-btn">
+                <i class="fas fa-phone"></i>
+            </a>
+            <a href="#appointment-form" class="contact-btn appointment-btn">
+                <i class="far fa-calendar-check"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking on a nav link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+
+            // Enhanced slider functionality with auto-slide
+            const sliders = document.querySelectorAll('.gallery-slider');
+            
+            sliders.forEach(slider => {
+                const track = slider.querySelector('.gallery-track');
+                const originalItems = track.querySelectorAll('.gallery-item');
+                
+                // Clone first and last slides for infinite effect
+                if (originalItems.length > 1) {
+                    const firstSlideClone = originalItems[0].cloneNode(true);
+                    const lastSlideClone = originalItems[originalItems.length - 1].cloneNode(true);
+                    
+                    // Add classes to identify clones
+                    firstSlideClone.classList.add('clone');
+                    lastSlideClone.classList.add('clone');
+                    
+                    // Append clones to track
+                    track.appendChild(firstSlideClone);
+                    track.insertBefore(lastSlideClone, originalItems[0]);
+                }
+                
+                // Get all items including clones
+                const items = track.querySelectorAll('.gallery-item');
+                
+                let isDragging = false;
+                let startPos = 0;
+                let currentTranslate = 0;
+                let prevTranslate = 0;
+                let animationID = null;
+                let autoSlideInterval = null;
+                let slideWidth = 0;
+                let currentIndex = 1; // Start at index 1 (after the cloned last slide)
+                
+                // Calculate dimensions for sliding
+                function calculateDimensions() {
+                    if (items.length > 0) {
+                        const itemStyle = window.getComputedStyle(items[0]);
+                        const itemWidth = items[0].getBoundingClientRect().width;
+                        const marginRight = parseFloat(itemStyle.marginRight) || 0;
+                        const marginLeft = parseFloat(itemStyle.marginLeft) || 0;
+                        slideWidth = itemWidth + marginRight + marginLeft;
+                        
+                        // Initial position - show the first real slide (index 1)
+                        moveToSlide(currentIndex, false);
+                    }
+                }
+                
+                // Initialize dimensions
+                calculateDimensions();
+                
+                // Handle window resize
+                window.addEventListener('resize', calculateDimensions);
+                
+                // Auto slide function
+                function startAutoSlide() {
+                    stopAutoSlide(); // Clear any existing interval
+                    
+                    autoSlideInterval = setInterval(() => {
+                        if (!isDragging) {
+                            currentIndex++;
+                            moveToSlide(currentIndex);
+                        }
+                    }, 3000); // Change slide every 3 seconds
+                }
+                
+                function stopAutoSlide() {
+                    if (autoSlideInterval) {
+                        clearInterval(autoSlideInterval);
+                    }
+                }
+                
+                function moveToSlide(index, useTransition = true) {
+                    currentIndex = index;
+                    currentTranslate = -slideWidth * index;
+                    prevTranslate = currentTranslate;
+                    setSliderPosition(useTransition);
+                    
+                    // Handle infinite loop
+                    if (originalItems.length > 1) {
+                        // If we're at the clone of the last slide (index 0)
+                        if (currentIndex === 0) {
+                            setTimeout(() => {
+                                moveToSlide(originalItems.length, false);
+                            }, 500);
+                        }
+                        // If we're at the clone of the first slide (last index)
+                        else if (currentIndex === items.length - 1) {
+                            setTimeout(() => {
+                                moveToSlide(1, false);
+                            }, 500);
+                        }
+                    }
+                }
+                
+                function setSliderPosition(useTransition = true) {
+                    track.style.transition = useTransition ? 'transform 0.5s ease' : 'none';
+                    track.style.transform = `translateX(${currentTranslate}px)`;
+                }
+                
+                items.forEach(item => {
+                    // Touch events
+                    item.addEventListener('touchstart', touchStart);
+                    item.addEventListener('touchend', touchEnd);
+                    item.addEventListener('touchmove', touchMove);
+                    
+                    // Mouse events
+                    item.addEventListener('mousedown', touchStart);
+                    item.addEventListener('mouseup', touchEnd);
+                    item.addEventListener('mouseleave', touchEnd);
+                    item.addEventListener('mousemove', touchMove);
+                    
+                    // Prevent context menu
+                    item.addEventListener('contextmenu', e => e.preventDefault());
+                });
+                
+                function touchStart(event) {
+                    stopAutoSlide(); // Pause auto-slide when user interacts
+                    startPos = getPositionX(event);
+                    isDragging = true;
+                    track.style.transition = 'none';
+                    cancelAnimationFrame(animationID);
+                }
+                
+                function touchEnd() {
+                    isDragging = false;
+                    track.style.transition = 'transform 0.5s ease';
+                    
+                    // Snap to nearest slide
+                    const movedBy = currentTranslate - prevTranslate;
+                    
+                    if (movedBy < -100) {
+                        // Move to next slide
+                        currentIndex++;
+                    }
+                    
+                    if (movedBy > 100) {
+                        // Move to previous slide
+                        currentIndex--;
+                    }
+                    
+                    moveToSlide(currentIndex);
+                    startAutoSlide(); // Resume auto-slide after interaction
+                }
+                
+                function touchMove(event) {
+                    if (isDragging) {
+                        const currentPosition = getPositionX(event);
+                        currentTranslate = prevTranslate + currentPosition - startPos;
+                        track.style.transform = `translateX(${currentTranslate}px)`;
+                    }
+                }
+                
+                function getPositionX(event) {
+                    return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+                }
+                
+                // Start auto-sliding
+                startAutoSlide();
+                
+                // Pause auto-slide when hovering over the slider
+                slider.addEventListener('mouseenter', stopAutoSlide);
+                slider.addEventListener('mouseleave', startAutoSlide);
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Header scroll effect
+            const header = document.querySelector('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    header.style.padding = '0.5rem 0';
+                    header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+                } else {
+                    header.style.padding = '1rem 0';
+                    header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+                }
+            });
+            
+            // View More and View All buttons functionality
+            const viewMoreBtn = document.querySelector('.view-more-btn');
+            const viewAllBtn = document.querySelector('.view-all-btn');
+            
+            // Function to show all showcase items
+            function showAllShowcaseItems() {
+                const hiddenItems = document.querySelectorAll('.showcase-item:nth-child(n+5)');
+                hiddenItems.forEach(item => {
+                    item.style.display = 'block';
+                });
+            }
+            
+            // View More button click handler
+            if (viewMoreBtn) {
+                viewMoreBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showAllShowcaseItems();
+                    this.parentElement.style.display = 'none';
+                    
+                    // Also hide the View All button container if it exists
+                    const viewAllContainer = document.querySelector('.view-all-container');
+                    if (viewAllContainer) {
+                        viewAllContainer.style.display = 'none';
+                    }
+                });
+            }
+            
+            // View All button click handler
+            if (viewAllBtn) {
+                viewAllBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showAllShowcaseItems();
+                    this.parentElement.style.display = 'none';
+                    
+                    // Also hide the View More button container if it exists
+                    const viewMoreContainer = document.querySelector('.view-more-container');
+                    if (viewMoreContainer) {
+                        viewMoreContainer.style.display = 'none';
+                    }
+                });
+            }
+            
+            // Appointment Form Submission
+            const appointmentForm = document.querySelector('#appointment-form form');
+            if (appointmentForm) {
+                appointmentForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form data
+                    const name = document.getElementById('name').value;
+                    const phone = document.getElementById('phone').value;
+                    const email = document.getElementById('email').value;
+                    const service = document.getElementById('service').value;
+                    const date = document.getElementById('date').value;
+                    const message = document.getElementById('message').value;
+                    
+                    // Create email content
+                    const emailBody = `
+                        Name: ${name}
+                        Phone: ${phone}
+                        Email: ${email}
+                        Service: ${service}
+                        Date: ${date}
+                        Message: ${message}
+                    `;
+                    
+                    // Send email using mailto link (as a fallback method)
+                    const mailtoLink = `mailto:smartpaintingservice@outlook.com?subject=Appointment Request from ${name}&body=${encodeURIComponent(emailBody)}`;
+                    window.location.href = mailtoLink;
+                    
+                    // Show confirmation message
+                    alert('Thank you for your appointment request! We will contact you shortly to confirm.');
+                    
+                    // Reset form
+                    this.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
